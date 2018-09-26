@@ -6,7 +6,7 @@ public class Ticket {
     public int checkInTime;
     public int checkOutTime;
     public int day = 0;
-    public int bill;
+    public double bill;
 
     public Ticket(int inTime) {
         ticketNumber = count++;

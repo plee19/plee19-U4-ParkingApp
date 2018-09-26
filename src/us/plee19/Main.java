@@ -5,10 +5,16 @@ import java.util.Scanner;
 public class Main {
     static Scanner keyboard = new Scanner(System.in);
     static boolean isValidOption = false;
+    static CheckInATM checkIn = new CheckInATM();
+    static CheckOutATM checkOut = new CheckOutATM();
 
     public static void main(String[] args) {
-        CheckInATM checkIn = new CheckInATM();
-	    CheckOutATM checkOut = new CheckOutATM();
+        while (!checkIn.isClosed){
+            mainScreen();
+        }
+    }
+
+    public static void mainScreen() {
         System.out.print("Best Value Parking Garage\n\n=========================\n\n1 - Check/In\n2 - Check/Out\n\n=>");
         while (!isValidOption) {
             switch(keyboard.nextInt()) {

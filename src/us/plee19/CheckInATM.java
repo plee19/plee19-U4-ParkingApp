@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class CheckInATM extends ATM {
     Scanner keyboard = new Scanner(System.in);
+    public boolean isClosed = false;
 
     public int getInTime() {
         return (int)(Math.random() * ((12 - 7) + 1)) + 7;
@@ -11,6 +12,7 @@ public class CheckInATM extends ATM {
 
     public void createTicket(int inTime) {
         Ticket newTicket = new Ticket(inTime);
+        tickets.add(newTicket);
     }
 
     public void closeGarage() {
@@ -23,7 +25,7 @@ public class CheckInATM extends ATM {
     public void displayStartScreen() {
         System.out.print("Best Value Parking Garage\n\n=========================\n\n1 - Check/In\n\n3 - Close Garage\n\n=>");
         boolean isValidNumber = false;
-        while (!isValidNumber) {
+        while (isValidNumber == false) {
             int inputNumber = keyboard.nextInt();
             switch(inputNumber) {
                 case 1:
@@ -38,5 +40,6 @@ public class CheckInATM extends ATM {
                     System.out.println("Please enter a valid option.");
             }
         }
+        isValidNumber = false;
     }
 }
