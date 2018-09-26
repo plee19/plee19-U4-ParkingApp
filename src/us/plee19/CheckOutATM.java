@@ -1,14 +1,25 @@
 package us.plee19;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CheckOutATM extends ATM {
     int lostTicketCount;
     int ticketsPaidCount;
     Scanner keyboard = new Scanner(System.in);
+    FileInput ticketFile = new FileInput("ticketFile.txt");
 
-    public void loadExistingTickets() {
+    public ArrayList<Ticket> loadExistingTickets() {
+        String line;
+        String[] fields;
+        ArrayList<Ticket> ticketList = new ArrayList<>();
 
+        while ((line = ticketFile.fileReadLine()) != null) {
+            fields = line.split(",");
+            Ticket ticket = new Ticket(Integer.parseInt(fields[0]), Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]));
+            ticketList.add(ticket);
+        }
+        return ticketList;
     }
 
     public void checkOut(Ticket ticket) {
@@ -27,7 +38,7 @@ public class CheckOutATM extends ATM {
                 "Receipt for a vehicle id " + ticket.ticketNumber +
                 "\n\n\n" + (ticket.checkOutTime - ticket.checkInTime) + "hours parked "
                 + ticket.checkInTime + " - " + ticket.checkOutTime + "\n\n$" + ticket.bill);
-        // Remove from ArrayList
+        ticketsPaidCount++;
     }
 
     public void lostTicket(Ticket ticket) {
@@ -36,7 +47,7 @@ public class CheckOutATM extends ATM {
         System.out.println("Best Value Parking Garage\n\n=========================\n\n" +
                 "Receipt for a vehicle id " + ticket.ticketNumber +
                 "\n\n\nLost Ticket\n\n$" + ticket.bill);
-        // Remove from ArrayList
+        lostTicketCount++;
     }
 
     @Override
@@ -46,6 +57,8 @@ public class CheckOutATM extends ATM {
         boolean isValidTicket = false;
         while (!isValidNumber) {
             int inputNumber = keyboard.nextInt();
+
+            // NEED TO REFACTOR/ADJUST
             switch (inputNumber) {
                 case 1:
                     while (!isValidTicket) {
@@ -80,7 +93,7 @@ public class CheckOutATM extends ATM {
                         break;
                     }
                     default:
-                            System.out.println("Please enter a valid option.");
+                            //System.out.println("Please enter a valid option.");
                     }
             }
         }
