@@ -24,6 +24,7 @@ public class CheckOutATM extends ATM {
 
     public void checkOut(Ticket ticket) {
         ticket.checkOutTime = (int) (Math.random() * ((23 - 13) + 1)) + 13;
+        calculateBill(ticket);
     }
 
     public void calculateBill(Ticket ticket) {
@@ -34,6 +35,10 @@ public class CheckOutATM extends ATM {
         } else {
             ticket.bill = 5 + (ticket.checkOutTime - ticket.checkInTime - 3);
         }
+        printScreen(ticket);
+    }
+
+    public void printScreen(Ticket ticket) {
         System.out.println("Best Value Parking Garage\n\n=========================\n\n" +
                 "Receipt for a vehicle id " + ticket.ticketNumber +
                 "\n\n\n" + (ticket.checkOutTime - ticket.checkInTime) + "hours parked "

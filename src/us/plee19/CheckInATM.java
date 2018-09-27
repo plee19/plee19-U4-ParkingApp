@@ -38,7 +38,6 @@ public class CheckInATM extends ATM {
         outputFile.fileClose();
         isClosed = true;
     }
-
     @Override
     public void displayStartScreen() {
         System.out.print("Best Value Parking Garage\n\n=========================\n\n1 - Check/In\n\n3 - Close Garage\n\n=>");

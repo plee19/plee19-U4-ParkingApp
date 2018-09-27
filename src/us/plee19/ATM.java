@@ -10,10 +10,10 @@ public class ATM {
     static CheckOutATM checkOut = new CheckOutATM();
     static Scanner keyboard = new Scanner(System.in);
 
-    public void displayStartScreen() {
-    }
+    //public void displayStartScreen() {
+    //}
 
-    public static void mainScreen() {
+    public void displayStartScreen() {
         System.out.print("Best Value Parking Garage\n\n=========================\n\n1 - Check/In\n2 - Check/Out\n\n=>");
         while (!isValidOption) {
             switch(keyboard.nextInt()) {
