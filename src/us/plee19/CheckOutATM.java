@@ -1,33 +1,30 @@
 package us.plee19;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class CheckOutATM extends ATM {
-    int lostTicketCount;
-    int ticketsPaidCount;
-    Scanner keyboard = new Scanner(System.in);
     FileInput ticketFile = new FileInput("ticketFile.txt");
 
     public ArrayList<Ticket> loadExistingTickets() {
         String line;
         String[] fields;
+        int count;
         ArrayList<Ticket> ticketList = new ArrayList<>();
 
         while ((line = ticketFile.fileReadLine()) != null) {
             fields = line.split(",");
             Ticket ticket = new Ticket(Integer.parseInt(fields[0]), Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]));
+            Ticket.count = Integer.parseInt(fields[0]);
             ticketList.add(ticket);
         }
         return ticketList;
     }
 
-    public void checkOut(Ticket ticket) {
+    public static void getOutTime(Ticket ticket) {
         ticket.checkOutTime = (int) (Math.random() * ((23 - 13) + 1)) + 13;
-        calculateBill(ticket);
     }
 
-    public void calculateBill(Ticket ticket) {
+    public static void checkOut(Ticket ticket) {
         if (ticket.day > 0) {
             ticket.bill = 15;
         } else if (ticket.checkOutTime - ticket.checkInTime <= 3) {
@@ -38,21 +35,18 @@ public class CheckOutATM extends ATM {
         printScreen(ticket);
     }
 
-    public void printScreen(Ticket ticket) {
+    public static void printScreen(Ticket ticket) {
         System.out.println("Best Value Parking Garage\n\n=========================\n\n" +
                 "Receipt for a vehicle id " + ticket.ticketNumber +
                 "\n\n\n" + (ticket.checkOutTime - ticket.checkInTime) + "hours parked "
                 + ticket.checkInTime + " - " + ticket.checkOutTime + "\n\n$" + ticket.bill);
-        ticketsPaidCount++;
     }
 
-    public void lostTicket(Ticket ticket) {
+    public static void lostTicket(Ticket ticket) {
         ticket.bill = 25;
-        lostTicketCount++;
         System.out.println("Best Value Parking Garage\n\n=========================\n\n" +
                 "Receipt for a vehicle id " + ticket.ticketNumber +
                 "\n\n\nLost Ticket\n\n$" + ticket.bill);
-        lostTicketCount++;
     }
 
     @Override
@@ -72,6 +66,7 @@ public class CheckOutATM extends ATM {
                         for (int i = 0; i < CheckOutATM.tickets.size(); i++) {
                             if (CheckOutATM.tickets.get(i).ticketNumber == tickNum) {
                                 isValidTicket = true;
+                                getOutTime(tickets.get(i));
                                 checkOut(tickets.get(i));
                             } else {
                                 System.out.println("Invalid number");

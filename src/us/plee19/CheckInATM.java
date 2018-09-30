@@ -7,7 +7,11 @@ import java.util.Scanner;
 public class CheckInATM extends ATM {
     Scanner keyboard = new Scanner(System.in);
     public boolean isClosed = false;
-    FileOutput outputFile = new FileOutput("ticketFile.txt");
+    FileOutput ticketFile = new FileOutput("ticketFile.txt");
+    FileInput ticketFileRead = new FileInput("ticketFile.txt");
+    int paidTicketCount;
+    int lostTicketCount;
+    int paidTicketSum;
 
     public int getInTime() {
         return (int)(Math.random() * ((12 - 7) + 1)) + 7;
@@ -21,24 +25,34 @@ public class CheckInATM extends ATM {
     }
 
     public void closeGarage() {
-        System.out.println("Best Value Parking Garage\n\n=========================\n\nActivity to Date\n\n\n");
-
-        // Print total $ collected, count of check-ins, lost tickets collected, total lost tickets, total overall
-        try {
-            new PrintWriter("ticketFile.txt").close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
         for (int i = 0; i < tickets.size(); i++) {
             if (tickets.get(i).bill == 0) {
                 tickets.get(i).day++;
             }
-            outputFile.fileWrite(tickets.get(i).ticketNumber + "," + tickets.get(i).checkInTime + "," + tickets.get(i).checkOutTime + "," + tickets.get(i).day + "," + tickets.get(i).bill);
+            ticketFile.fileWrite(tickets.get(i).ticketNumber + "," + tickets.get(i).checkInTime + "," + tickets.get(i).checkOutTime + "," + tickets.get(i).day + "," + tickets.get(i).bill);
         }
-        outputFile.fileClose();
+        ticketFile.fileClose();
+
+        String line;
+        String[] fields;
+        while ((line = ticketFileRead.fileReadLine()) != null) {
+            fields = line.split(",");
+            if (Integer.parseInt(fields[4]) == 25) {
+                lostTicketCount++;
+            } else if (Integer.parseInt(fields[4]) != 0) {
+                paidTicketCount++;
+                paidTicketSum += Integer.parseInt(fields[4]);
+            }
+        }
+
+        System.out.println("Best Value Parking Garage\n\n=========================\n\nActivity to Date\n\n");
+        System.out.println("$" + paidTicketSum + " was collected from " + paidTicketCount + " Check Ins\n");
+        System.out.println("$" + (lostTicketCount * 25) + " was collected from " + lostTicketCount + " Lost Tickets\n");
+        System.out.println("$" + (paidTicketSum + (lostTicketCount * 25)) + " was collected overall");
+
         isClosed = true;
     }
-    @Override
+
     public void displayStartScreen() {
         System.out.print("Best Value Parking Garage\n\n=========================\n\n1 - Check/In\n\n3 - Close Garage\n\n=>");
         boolean isValidNumber = false;
@@ -57,6 +71,5 @@ public class CheckInATM extends ATM {
                     System.out.println("Please enter a valid option.");
             }
         }
-        isValidNumber = false;
     }
 }
