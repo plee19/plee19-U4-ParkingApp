@@ -20,14 +20,15 @@ public class CheckInATM extends ATM {
     public void createTicket(int inTime) {
         Ticket newTicket = new Ticket(inTime);
         tickets.add(newTicket);
-        System.out.println("Best Value Parking Garage\n\n=========================\n\nTicket number " + newTicket.ticketNumber + "\n\n\n\n");
+        System.out.println("Best Value Parking Garage\n\n=========================\n\nTicket number " + newTicket.ticketNumber + "\n");
         keyboard.nextLine();
     }
 
     public void closeGarage() {
         for (int i = 0; i < tickets.size(); i++) {
+            // Unpaid tickets at close will default as LostTicket
             if (tickets.get(i).bill == 0) {
-                tickets.get(i).day++;
+                tickets.get(i).bill = 25;
             }
             ticketFile.fileWrite(tickets.get(i).ticketNumber + "," + tickets.get(i).checkInTime + "," + tickets.get(i).checkOutTime + "," + tickets.get(i).day + "," + tickets.get(i).bill);
         }

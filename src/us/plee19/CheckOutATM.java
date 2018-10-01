@@ -25,12 +25,14 @@ public class CheckOutATM extends ATM {
     }
 
     public static void checkOut(Ticket ticket) {
-        if (ticket.day > 0) {
-            ticket.bill = 15;
-        } else if (ticket.checkOutTime - ticket.checkInTime <= 3) {
+        if (ticket.checkOutTime - ticket.checkInTime <= 3) {
             ticket.bill = 5;
         } else {
             ticket.bill = 5 + (ticket.checkOutTime - ticket.checkInTime - 3);
+        }
+        // Max rate per day
+        if (ticket.bill > 15) {
+            ticket.bill = 15;
         }
         printScreen(ticket);
     }
@@ -38,7 +40,7 @@ public class CheckOutATM extends ATM {
     public static void printScreen(Ticket ticket) {
         System.out.println("Best Value Parking Garage\n\n=========================\n\n" +
                 "Receipt for a vehicle id " + ticket.ticketNumber +
-                "\n\n\n" + (ticket.checkOutTime - ticket.checkInTime) + "hours parked "
+                "\n\n\n" + (ticket.checkOutTime - ticket.checkInTime) + " hours parked "
                 + ticket.checkInTime + " - " + ticket.checkOutTime + "\n\n$" + ticket.bill);
     }
 
@@ -60,41 +62,48 @@ public class CheckOutATM extends ATM {
             // NEED TO REFACTOR/ADJUST
             switch (inputNumber) {
                 case 1:
+                    isValidNumber = true;
                     while (!isValidTicket) {
-                        System.out.println("Enter ticket number: ");
+                        System.out.println("Enter ticket number or 0 to quit: ");
                         int tickNum = keyboard.nextInt();
+                        if (tickNum == 0) {
+                            isValidTicket = true;
+                            continue;
+                        }
                         for (int i = 0; i < CheckOutATM.tickets.size(); i++) {
                             if (CheckOutATM.tickets.get(i).ticketNumber == tickNum) {
                                 isValidTicket = true;
-                                getOutTime(tickets.get(i));
-                                checkOut(tickets.get(i));
-                            } else {
-                                System.out.println("Invalid number");
-                                isValidTicket = false;
+                                getOutTime(tickets.get(tickNum));
+                                checkOut(tickets.get(tickNum));
                             }
                         }
-                        isValidNumber = true;
-                        break;
+                        //isValidNumber = true;
+                        if (!isValidTicket) {
+                            System.out.println("Invalid number\n");
+                        }
                     }
                 case 2:
                     while (!isValidTicket) {
-                        System.out.println("Enter ticket number: ");
+                        System.out.println("Enter ticket number or 0 to quit: ");
                         int tickNum = keyboard.nextInt();
                         for (int i = 0; i < CheckOutATM.tickets.size(); i++) {
                             if (CheckOutATM.tickets.get(i).ticketNumber == tickNum) {
-                                isValidTicket = true;
                                 lostTicket(tickets.get(i));
+                                isValidTicket = true;
+                                break;
+                            } else if (tickNum == 0) {
+                                isValidTicket = true;
+                                break;
                             } else {
                                 System.out.println("Invalid number");
                                 isValidTicket = false;
+                                break;
                             }
                         }
                         isValidNumber = true;
                         break;
-                    }
-                    default:
-                            //System.out.println("Please enter a valid option.");
                     }
             }
         }
     }
+}
