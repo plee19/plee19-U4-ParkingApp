@@ -52,11 +52,11 @@ public class CheckInATM extends ATM {
         String[] fields;
         while ((line = ticketFileRead.fileReadLine()) != null) {
             fields = line.split(",");
-            if (Integer.parseInt(fields[4]) == 25) {
+            if (Integer.parseInt(fields[3]) == 25) {
                 lostTicketCount++;
-            } else if (Integer.parseInt(fields[4]) != 0) {
+            } else if (Integer.parseInt(fields[3]) != 0) {
                 paidTicketCount++;
-                paidTicketSum += Integer.parseInt(fields[4]);
+                paidTicketSum += Integer.parseInt(fields[3]);
             }
         }
 
@@ -80,7 +80,7 @@ public class CheckInATM extends ATM {
             switch(inputNumber) {
                 case 1:
                     isValidNumber = true;
-                    createTicket(this.getInTime());
+                    createTicket(getInTime());
                     break;
                 case 3:
                     isValidNumber = true;

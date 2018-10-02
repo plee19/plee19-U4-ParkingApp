@@ -14,7 +14,7 @@ public class CheckOutATM extends ATM {
      * Method to read from CSV file of tickets and return an ArrayList of ticket objects.
      * @return ArrayList of ticket objects
      */
-    public ArrayList<Ticket> loadExistingTickets() {
+    public void loadExistingTickets() {
         String line;
         String[] fields;
         ArrayList<Ticket> ticketList = new ArrayList<>();
@@ -25,7 +25,7 @@ public class CheckOutATM extends ATM {
             Ticket.count = Integer.parseInt(fields[0]);
             ticketList.add(ticket);
         }
-        return ticketList;
+        ATM.tickets = ticketList;
     }
 
     /**
@@ -104,7 +104,7 @@ public class CheckOutATM extends ATM {
                             }
                         }
                         if (!isValidTicket) {
-                            System.out.println("Invalid number\n");
+                            System.out.println("Invalid ticket");
                         }
                     }
                 case 2:
@@ -119,11 +119,12 @@ public class CheckOutATM extends ATM {
                             } else if (tickNum == 0) {
                                 isValidTicket = true;
                                 break;
-                            } else {
-                                System.out.println("Invalid number");
-                                isValidTicket = false;
-                                break;
                             }
+                        }
+                        if (!isValidTicket) {
+                             System.out.println("Invalid ticket");
+                             isValidTicket = false;
+                             break;
                         }
                         isValidNumber = true;
                         break;

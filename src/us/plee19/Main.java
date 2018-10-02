@@ -14,7 +14,7 @@ public class Main {
     static CheckOutATM checkOut = new CheckOutATM();
 
     public static void main(String[] args) {
-        ATM.tickets = checkOut.loadExistingTickets();
+        checkOut.loadExistingTickets();
         while (!checkIn.isClosed){
             System.out.print("Best Value Parking Garage\n\n=========================\n\n1 - Check/In\n2 - Check/Out\n\n=>");
             while (!isValidOption) {
