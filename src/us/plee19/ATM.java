@@ -14,8 +14,5 @@ public abstract class ATM {
     static FileInput ticketFile = new FileInput("ticketFile.txt");
     static FileOutput ticketFileOut = new FileOutput("ticketFile.txt");
 
-    /*public static void displayStartScreen() {
-    }*/
-
     public abstract void displayStartScreen();
 }
