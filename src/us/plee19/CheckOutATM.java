@@ -2,28 +2,44 @@ package us.plee19;
 
 import java.util.ArrayList;
 
+/**
+ * Class extending ATM to serve as the check-out ATM.
+ * @author plee19
+ * @version 1
+ */
 public class CheckOutATM extends ATM {
     FileInput ticketFile = new FileInput("ticketFile.txt");
 
+    /**
+     * Method to read from CSV file of tickets and return an ArrayList of ticket objects.
+     * @return ArrayList of ticket objects
+     */
     public ArrayList<Ticket> loadExistingTickets() {
         String line;
         String[] fields;
-        int count;
         ArrayList<Ticket> ticketList = new ArrayList<>();
 
         while ((line = ticketFile.fileReadLine()) != null) {
             fields = line.split(",");
-            Ticket ticket = new Ticket(Integer.parseInt(fields[0]), Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]));
+            Ticket ticket = new Ticket(Integer.parseInt(fields[0]), Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]));
             Ticket.count = Integer.parseInt(fields[0]);
             ticketList.add(ticket);
         }
         return ticketList;
     }
 
+    /**
+     * Method to calculate the end time of the ticket and place it in the checkOutTime field.
+     * @param ticket Ticket object
+     */
     public static void getOutTime(Ticket ticket) {
         ticket.checkOutTime = (int) (Math.random() * ((23 - 13) + 1)) + 13;
     }
 
+    /**
+     * Method to calculate bill, leading into the printScreen method to display result to customer
+     * @param ticket Ticket object with valid checkOutTime
+     */
     public static void checkOut(Ticket ticket) {
         if (ticket.checkOutTime - ticket.checkInTime <= 3) {
             ticket.bill = 5;
@@ -37,6 +53,10 @@ public class CheckOutATM extends ATM {
         printScreen(ticket);
     }
 
+    /**
+     * Method to display bill to customer based on ticket.
+     * @param ticket Ticket object
+     */
     public static void printScreen(Ticket ticket) {
         System.out.println("Best Value Parking Garage\n\n=========================\n\n" +
                 "Receipt for a vehicle id " + ticket.ticketNumber +
@@ -44,13 +64,20 @@ public class CheckOutATM extends ATM {
                 + ticket.checkInTime + " - " + ticket.checkOutTime + "\n\n$" + ticket.bill);
     }
 
+    /**
+     * Method to set a ticket as lost and display the result to the customer.
+     * @param ticket Ticket object
+     */
     public static void lostTicket(Ticket ticket) {
         ticket.bill = 25;
         System.out.println("Best Value Parking Garage\n\n=========================\n\n" +
                 "Receipt for a vehicle id " + ticket.ticketNumber +
-                "\n\n\nLost Ticket\n\n$" + ticket.bill);
+                "\n\nLost Ticket\n\n$" + ticket.bill);
     }
 
+    /**
+     * Overridden method from ATM superclass to present menu and determine course of action.
+     */
     @Override
     public void displayStartScreen() {
         System.out.print("Best Value Parking Garage\n\n=========================\n\n1 - Check/Out\n2 - Lost Ticket\n\n=>");
@@ -59,7 +86,6 @@ public class CheckOutATM extends ATM {
         while (!isValidNumber) {
             int inputNumber = keyboard.nextInt();
 
-            // NEED TO REFACTOR/ADJUST
             switch (inputNumber) {
                 case 1:
                     isValidNumber = true;
@@ -73,11 +99,10 @@ public class CheckOutATM extends ATM {
                         for (int i = 0; i < CheckOutATM.tickets.size(); i++) {
                             if (CheckOutATM.tickets.get(i).ticketNumber == tickNum) {
                                 isValidTicket = true;
-                                getOutTime(tickets.get(tickNum));
-                                checkOut(tickets.get(tickNum));
+                                getOutTime(tickets.get(i));
+                                checkOut(tickets.get(i));
                             }
                         }
-                        //isValidNumber = true;
                         if (!isValidTicket) {
                             System.out.println("Invalid number\n");
                         }
