@@ -15,14 +15,6 @@ import java.io.PrintStream;
 public class CheckInATMTest extends TestCase {
     CheckInATM testATM = new CheckInATM();
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
     @Test
     public void testGetInTime() {
         assertTrue(testATM.getInTime() >= 7 && testATM.getInTime() <= 12);

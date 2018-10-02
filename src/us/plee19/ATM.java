@@ -11,6 +11,8 @@ import java.util.Scanner;
 public abstract class ATM {
     static ArrayList<Ticket> tickets = new ArrayList<>();
     static Scanner keyboard = new Scanner(System.in);
+    static FileInput ticketFile = new FileInput("ticketFile.txt");
+    static FileOutput ticketFileOut = new FileOutput("ticketFile.txt");
 
     /*public static void displayStartScreen() {
     }*/

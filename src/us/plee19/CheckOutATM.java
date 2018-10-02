@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @version 1
  */
 public class CheckOutATM extends ATM {
-    FileInput ticketFile = new FileInput("ticketFile.txt");
+
 
     /**
      * Method to read from CSV file of tickets and return an ArrayList of ticket objects.

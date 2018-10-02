@@ -1,17 +1,12 @@
 package us.plee19;
 
-import java.util.Scanner;
-
 /**
  * Class extending ATM to serve as the Check-In ATM.
  * @author plee19
  * @version 1
  */
 public class CheckInATM extends ATM {
-    Scanner keyboard = new Scanner(System.in);
-    public boolean isClosed = false;
-    FileOutput ticketFile = new FileOutput("ticketFile.txt");
-    FileInput ticketFileRead = new FileInput("ticketFile.txt");
+    public static boolean isClosed = false;
     int paidTicketCount;
     int lostTicketCount;
     int paidTicketSum;
@@ -44,13 +39,13 @@ public class CheckInATM extends ATM {
             if (tickets.get(i).bill == 0) {
                 tickets.get(i).bill = 25;
             }
-            ticketFile.fileWrite(tickets.get(i).ticketNumber + "," + tickets.get(i).checkInTime + "," + tickets.get(i).checkOutTime + "," + tickets.get(i).bill);
+            ticketFileOut.fileWrite(tickets.get(i).ticketNumber + "," + tickets.get(i).checkInTime + "," + tickets.get(i).checkOutTime + "," + tickets.get(i).bill);
         }
-        ticketFile.fileClose();
+        ticketFileOut.fileClose();
 
         String line;
         String[] fields;
-        while ((line = ticketFileRead.fileReadLine()) != null) {
+        while ((line = ticketFile.fileReadLine()) != null) {
             fields = line.split(",");
             if (Integer.parseInt(fields[3]) == 25) {
                 lostTicketCount++;
