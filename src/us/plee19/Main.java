@@ -10,11 +10,12 @@ import java.util.Scanner;
 public class Main {
     static Scanner keyboard = new Scanner(System.in);
     static boolean isValidOption = false;
-    static CheckInATM checkIn = new CheckInATM();
-    static CheckOutATM checkOut = new CheckOutATM();
+    static ATMFactory atmFactory = new ATMFactory();
 
     public static void main(String[] args) {
-        checkOut.loadExistingTickets();
+        ATM checkIn = atmFactory.getATM(ATMType.CHECKIN);
+        ATM checkOut = atmFactory.getATM(ATMType.CHECKOUT);
+        //checkOut.loadExistingTickets();
         while (!CheckInATM.isClosed){
             System.out.print("Best Value Parking Garage\n\n=========================\n\n1 - Check/In\n2 - Check/Out\n\n=>");
             while (!isValidOption) {

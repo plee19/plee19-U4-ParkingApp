@@ -7,27 +7,33 @@ package us.plee19;
  */
 public class CheckInATM extends ATM {
     public static boolean isClosed = false;
-    int paidTicketCount;
-    int lostTicketCount;
-    int paidTicketSum;
-
+    private int paidTicketCount;
+    private int specialEventTicketCount;
+    private int lostTicketCount;
+    private int paidTicketSum;
+/*
     /**
      * Method to calculate start time of ticket, prior to ticket creation.
      * @return int check-in time to be used in ticket creation
      */
-    public int getInTime() {
+/*  public int getInTime() {
         return (int)(Math.random() * ((12 - 7) + 1)) + 7;
-    }
-
+    } */
     /**
      * Method to create a new instance of Ticket and print resulting ticket number to customer.
-     * @param inTime int check-in time to be used in ticket creation
      */
-    public void createTicket(int inTime) {
-        Ticket newTicket = new Ticket(inTime);
+    public void createTicket() {
+        Ticket newTicket = new Ticket(Clock.getInstance().getInTime());
         tickets.add(newTicket);
-        System.out.println("Best Value Parking Garage\n\n=========================\n\nTicket number " + newTicket.ticketNumber + "\n");
+        System.out.println("Best Value Parking Garage\n\n=========================\n\nTicket number " + newTicket.getTicketNumber() + "\n");
         keyboard.nextLine();
+    }
+
+    public void createSpecialEventTicket() {
+        Ticket newTicket = new Ticket(0);
+        newTicket.setFeeStrategy(new SpecialEventFeeStrategy());
+        tickets.add(newTicket);
+        System.out.println("Best Value Parking Garage\n\n=========================\n\nTicket number " + newTicket.getTicketNumber() + "\nSpecial Event Ticket\n");
     }
 
     /**
@@ -35,11 +41,13 @@ public class CheckInATM extends ATM {
      */
     public void closeGarage() {
         for (int i = 0; i < tickets.size(); i++) {
+            Ticket ticket = tickets.get(i);
             // Unpaid tickets at close will default as LostTicket
-            if (tickets.get(i).bill == 0) {
-                tickets.get(i).bill = 25;
+            if (ticket.getBill() == 0) {
+                ticket.setFeeStrategy(new LostTicketFeeStrategy());
+                ticket.setBill(ticket.getFeeStrategy().getTicketFee(ticket.getCheckInTime(), ticket.getCheckOutTime()));
             }
-            ticketFileOut.fileWrite(tickets.get(i).ticketNumber + "," + tickets.get(i).checkInTime + "," + tickets.get(i).checkOutTime + "," + tickets.get(i).bill);
+            ticketFileOut.fileWrite(ticket.getTicketNumber() + "," + ticket.getCheckInTime() + "," + ticket.getCheckOutTime() + "," + ticket.getBill());
         }
         ticketFileOut.fileClose();
 
@@ -49,6 +57,8 @@ public class CheckInATM extends ATM {
             fields = line.split(",");
             if (Integer.parseInt(fields[3]) == 25) {
                 lostTicketCount++;
+            } else if (Integer.parseInt(fields[3]) == 20) {
+                specialEventTicketCount++;
             } else if (Integer.parseInt(fields[3]) != 0) {
                 paidTicketCount++;
                 paidTicketSum += Integer.parseInt(fields[3]);
@@ -57,6 +67,7 @@ public class CheckInATM extends ATM {
 
         System.out.println("Best Value Parking Garage\n\n=========================\n\nDaily Activity\n");
         System.out.println("$" + paidTicketSum + " was collected from " + paidTicketCount + " Check Ins\n");
+        System.out.println("$" + (specialEventTicketCount * 15) + " was collected from " + specialEventTicketCount + " Special Events");
         System.out.println("$" + (lostTicketCount * 25) + " was collected from " + lostTicketCount + " Lost Tickets\n");
         System.out.println("$" + (paidTicketSum + (lostTicketCount * 25)) + " was collected overall");
 
@@ -68,14 +79,18 @@ public class CheckInATM extends ATM {
      */
     @Override
     public void displayStartScreen() {
-        System.out.print("Best Value Parking Garage\n\n=========================\n\n1 - Check/In\n3 - Close Garage\n\n=>");
+        System.out.print("Best Value Parking Garage\n\n=========================\n\n1 - Check/In\n2 - Special Event\n3 - Close Garage\n\n=>");
         boolean isValidNumber = false;
         while (isValidNumber == false) {
             int inputNumber = keyboard.nextInt();
             switch(inputNumber) {
                 case 1:
                     isValidNumber = true;
-                    createTicket(getInTime());
+                    createTicket();
+                    break;
+                case 2:
+                    isValidNumber = true;
+                    createSpecialEventTicket();
                     break;
                 case 3:
                     isValidNumber = true;
