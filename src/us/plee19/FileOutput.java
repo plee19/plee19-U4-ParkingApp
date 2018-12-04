@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * Creates class to handle file output methods.
  * @author plee19
- * @version 1
+ * @version 1.0
  */
 public class FileOutput {
 

@@ -3,7 +3,7 @@ package us.plee19;
 /**
  * Class extending ATM to serve as the Check-In ATM.
  * @author plee19
- * @version 1
+ * @version 1.0
  */
 public class CheckInATM extends ATM {
     public static boolean isClosed = false;
@@ -11,14 +11,7 @@ public class CheckInATM extends ATM {
     private int specialEventTicketCount;
     private int lostTicketCount;
     private int paidTicketSum;
-/*
-    /**
-     * Method to calculate start time of ticket, prior to ticket creation.
-     * @return int check-in time to be used in ticket creation
-     */
-/*  public int getInTime() {
-        return (int)(Math.random() * ((12 - 7) + 1)) + 7;
-    } */
+
     /**
      * Method to create a new instance of Ticket and print resulting ticket number to customer.
      */
@@ -29,6 +22,9 @@ public class CheckInATM extends ATM {
         keyboard.nextLine();
     }
 
+    /**
+     * Method to create a new instance of Ticket with the Special Event Fee Strategy, printing resulting ticket number to customer.
+     */
     public void createSpecialEventTicket() {
         Ticket newTicket = new Ticket(0);
         newTicket.setFeeStrategy(new SpecialEventFeeStrategy());
@@ -59,7 +55,7 @@ public class CheckInATM extends ATM {
                 lostTicketCount++;
             } else if (Integer.parseInt(fields[3]) == 20) {
                 specialEventTicketCount++;
-            } else if (Integer.parseInt(fields[3]) != 0) {
+            } else {
                 paidTicketCount++;
                 paidTicketSum += Integer.parseInt(fields[3]);
             }
@@ -67,7 +63,7 @@ public class CheckInATM extends ATM {
 
         System.out.println("Best Value Parking Garage\n\n=========================\n\nDaily Activity\n");
         System.out.println("$" + paidTicketSum + " was collected from " + paidTicketCount + " Check Ins\n");
-        System.out.println("$" + (specialEventTicketCount * 15) + " was collected from " + specialEventTicketCount + " Special Events");
+        System.out.println("$" + (specialEventTicketCount * 20) + " was collected from " + specialEventTicketCount + " Special Events");
         System.out.println("$" + (lostTicketCount * 25) + " was collected from " + lostTicketCount + " Lost Tickets\n");
         System.out.println("$" + (paidTicketSum + (lostTicketCount * 25)) + " was collected overall");
 

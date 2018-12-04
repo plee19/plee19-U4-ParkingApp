@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>us.plee19</OriginalElement>
+  <nodes>
+    <node x="1030.8000000000002" y="200.0">us.plee19.NormalFeeStrategy</node>
+    <node x="511.9000000000001" y="768.5">us.plee19.CheckOutATM</node>
+    <node x="671.3000000000001" y="441.0">us.plee19.ATM</node>
+    <node x="0.0" y="189.0">us.plee19.SpecialEventFeeStrategy</node>
+    <node x="366.66840659340676" y="111.0">us.plee19.Ticket</node>
+    <node x="835.8000000000001" y="144.0">us.plee19.FileInput</node>
+    <node x="787.9666666666667" y="779.5">us.plee19.ATMType</node>
+    <node x="649.7166666666668" y="1081.0">us.plee19.Main</node>
+    <node x="388.4917124542127" y="0.0">us.plee19.FeeStrategy</node>
+    <node x="193.05" y="440.0">us.plee19.Clock</node>
+    <node x="111.49171245421269" y="702.0">us.plee19.CheckInATM</node>
+    <node x="637.8000000000001" y="155.0">us.plee19.FileOutput</node>
+    <node x="384.05" y="474.5">us.plee19.LostTicketFeeStrategy</node>
+    <node x="586.2166666666667" y="980.0">us.plee19.ATMFactory</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="us.plee19.SpecialEventFeeStrategy" target="us.plee19.FeeStrategy">
+      <point x="0.0" y="-36.5" />
+      <point x="97.5" y="71.0" />
+      <point x="407.9917124542127" y="71.0" />
+      <point x="-78.0" y="25.5" />
+    </edge>
+    <edge source="us.plee19.Main" target="us.plee19.ATMFactory">
+      <point x="-5.6843418860808015E-14" y="-59.0" />
+      <point x="54.0" y="25.5" />
+    </edge>
+    <edge source="us.plee19.CheckInATM" target="us.plee19.Ticket">
+      <point x="-66.57142857142856" y="-114.0" />
+      <point x="161.42028388278413" y="682.0" />
+      <point x="139.1177197802199" y="682.0" />
+      <point x="139.1177197802199" y="410.0" />
+      <point x="385.2684065934068" y="410.0" />
+      <point x="-74.39999999999998" y="114.5" />
+    </edge>
+    <edge source="us.plee19.Main" target="us.plee19.CheckInATM">
+      <point x="-78.80000000000013" y="-59.0" />
+      <point x="669.4166666666667" y="1061.0" />
+      <point x="169.7417124542127" y="1061.0" />
+      <point x="-58.25" y="114.0" />
+    </edge>
+    <edge source="us.plee19.CheckInATM" target="us.plee19.Clock">
+      <point x="0.0" y="-114.0" />
+      <point x="227.9917124542127" y="682.0" />
+      <point x="235.8" y="682.0" />
+      <point x="-42.75" y="71.0" />
+    </edge>
+    <edge source="us.plee19.ATMFactory" target="us.plee19.CheckOutATM">
+      <point x="-27.0" y="-25.5" />
+      <point x="667.2166666666667" y="950.0" />
+      <point x="611.4000000000001" y="950.0" />
+      <point x="0.0" y="47.5" />
+    </edge>
+    <edge source="us.plee19.CheckInATM" target="us.plee19.SpecialEventFeeStrategy">
+      <point x="-99.85714285714289" y="-114.0" />
+      <point x="128.1345695970698" y="682.0" />
+      <point x="97.5" y="682.0" />
+      <point x="0.0" y="36.5" />
+    </edge>
+    <edge source="us.plee19.NormalFeeStrategy" target="us.plee19.FeeStrategy">
+      <point x="0.0" y="-25.5" />
+      <point x="1128.3000000000002" y="91.0" />
+      <point x="563.9917124542127" y="91.0" />
+      <point x="78.0" y="25.5" />
+    </edge>
+    <edge source="us.plee19.CheckInATM" target="us.plee19.ATM">
+      <point x="99.85714285714289" y="-114.0" />
+      <point x="327.8488553113556" y="642.0" />
+      <point x="721.3000000000001" y="642.0" />
+      <point x="-50.0" y="70.0" />
+    </edge>
+    <edge source="us.plee19.ATM" target="us.plee19.Ticket">
+      <point x="-80.0" y="-70.0" />
+      <point x="691.3000000000001" y="370.0" />
+      <point x="534.0684065934067" y="370.0" />
+      <point x="74.39999999999998" y="114.5" />
+    </edge>
+    <edge source="us.plee19.CheckOutATM" target="us.plee19.NormalFeeStrategy">
+      <point x="85.28571428571433" y="-47.5" />
+      <point x="696.6857142857144" y="682.0" />
+      <point x="1128.3000000000002" y="682.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="us.plee19.ATM" target="us.plee19.FileOutput">
+      <point x="-40.0" y="-70.0" />
+      <point x="731.3000000000001" y="360.0" />
+      <point x="682.3000000000001" y="360.0" />
+      <point x="-44.5" y="70.5" />
+    </edge>
+    <edge source="us.plee19.ATMFactory" target="us.plee19.ATM">
+      <point x="27.0" y="-25.5" />
+      <point x="721.2166666666667" y="950.0" />
+      <point x="774.4666666666667" y="950.0" />
+      <point x="774.4666666666667" y="672.0" />
+      <point x="821.3000000000001" y="672.0" />
+      <point x="50.0" y="70.0" />
+    </edge>
+    <edge source="us.plee19.CheckOutATM" target="us.plee19.LostTicketFeeStrategy">
+      <point x="-56.85714285714289" y="-47.5" />
+      <point x="554.5428571428572" y="602.0" />
+      <point x="530.3" y="602.0" />
+      <point x="48.75" y="36.5" />
+    </edge>
+    <edge source="us.plee19.ATMFactory" target="us.plee19.ATMType">
+      <point x="81.0" y="-25.5" />
+      <point x="775.2166666666667" y="960.0" />
+      <point x="812.9666666666667" y="960.0" />
+      <point x="-25.0" y="36.5" />
+    </edge>
+    <edge source="us.plee19.CheckOutATM" target="us.plee19.Ticket">
+      <point x="0.0" y="-47.5" />
+      <point x="611.4000000000001" y="622.0" />
+      <point x="651.3882783882785" y="622.0" />
+      <point x="651.3882783882785" y="380.0" />
+      <point x="496.8684065934068" y="380.0" />
+      <point x="37.200000000000045" y="114.5" />
+    </edge>
+    <edge source="us.plee19.ATM" target="us.plee19.FileInput">
+      <point x="40.0" y="-70.0" />
+      <point x="811.3000000000001" y="410.0" />
+      <point x="879.5500000000001" y="410.0" />
+      <point x="-43.75" y="81.5" />
+    </edge>
+    <edge source="us.plee19.LostTicketFeeStrategy" target="us.plee19.FeeStrategy">
+      <point x="1.1368683772161603E-13" y="-36.5" />
+      <point x="481.5500000000001" y="400.0" />
+      <point x="353.9184065934068" y="400.0" />
+      <point x="353.9184065934068" y="81.0" />
+      <point x="446.9917124542127" y="81.0" />
+      <point x="-39.0" y="25.5" />
+    </edge>
+    <edge source="us.plee19.Main" target="us.plee19.ATMType">
+      <point x="39.39999999999992" y="-59.0" />
+      <point x="787.6166666666668" y="1051.0" />
+      <point x="862.9666666666667" y="1051.0" />
+      <point x="25.0" y="36.5" />
+    </edge>
+    <edge source="us.plee19.CheckOutATM" target="us.plee19.ATM">
+      <point x="56.85714285714289" y="-47.5" />
+      <point x="668.257142857143" y="662.0" />
+      <point x="787.9666666666667" y="662.0" />
+      <point x="16.66666666666663" y="70.0" />
+    </edge>
+    <edge source="us.plee19.ATMFactory" target="us.plee19.CheckInATM">
+      <point x="-81.0" y="-25.5" />
+      <point x="613.2166666666667" y="960.0" />
+      <point x="286.2417124542127" y="960.0" />
+      <point x="58.25" y="114.0" />
+    </edge>
+    <edge source="us.plee19.Ticket" target="us.plee19.FeeStrategy">
+      <point x="-46.5" y="-114.5" />
+      <point x="413.16840659340676" y="91.0" />
+      <point x="485.9917124542127" y="91.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="us.plee19.CheckInATM" target="us.plee19.LostTicketFeeStrategy">
+      <point x="33.285714285714334" y="-114.0" />
+      <point x="261.277426739927" y="622.0" />
+      <point x="432.8" y="622.0" />
+      <point x="-48.75" y="36.5" />
+    </edge>
+    <edge source="us.plee19.CheckOutATM" target="us.plee19.Clock">
+      <point x="-85.28571428571433" y="-47.5" />
+      <point x="526.1142857142858" y="612.0" />
+      <point x="321.3" y="612.0" />
+      <point x="42.75" y="71.0" />
+    </edge>
+    <edge source="us.plee19.Main" target="us.plee19.ATM">
+      <point x="78.7999999999999" y="-59.0" />
+      <point x="827.0166666666668" y="1061.0" />
+      <point x="898.4666666666667" y="1061.0" />
+      <point x="898.4666666666667" y="672.0" />
+      <point x="854.6333333333334" y="672.0" />
+      <point x="83.33333333333337" y="70.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="521.5" y="344.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

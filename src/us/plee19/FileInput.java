@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Creates class to handle file input methods.
  * @author plee19
- * @version 1
+ * @version 1.0
  */
 public class FileInput {
 

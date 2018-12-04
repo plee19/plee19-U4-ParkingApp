@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Class extending ATM to serve as the check-out ATM.
  * @author plee19
- * @version 1
+ * @version 1.0
  */
 public class CheckOutATM extends ATM {
 
@@ -14,7 +14,7 @@ public class CheckOutATM extends ATM {
      * Method to read from CSV file of tickets and return an ArrayList of ticket objects.
      * @return ArrayList of ticket objects
      */
-    public static void loadExistingTickets() {
+    public static void loadTickets() {
         String line;
         String[] fields;
         ArrayList<Ticket> ticketList = new ArrayList<>();
@@ -28,31 +28,6 @@ public class CheckOutATM extends ATM {
         ATM.tickets = ticketList;
     }
 
-    /**
-     * Method to calculate the end time of the ticket and place it in the checkOutTime field.
-     * @param ticket Ticket object
-     */
-    /*public static void getOutTime(Ticket ticket) {
-        ticket.setCheckOutTime(((int)Math.random() * ((23 - 13) + 1)) + 13);
-    }*/
-
-    /**
-     * Method to calculate bill, leading into the printScreen method to display result to customer
-     * @param ticket Ticket object with valid checkOutTime
-     */
-    /*public static void checkOut(Ticket ticket) {
-        if (ticket.checkOutTime - ticket.checkInTime <= 3) {
-            ticket.bill = 5;
-        } else {
-            ticket.bill = 5 + (ticket.checkOutTime - ticket.checkInTime - 3);
-        }
-        // Max rate per day
-        if (ticket.bill > 15) {
-            ticket.bill = 15;
-        }
-        printScreen(ticket);
-    }
-*/
     /**
      * Method to display bill to customer based on ticket.
      * @param ticket Ticket object
@@ -75,17 +50,6 @@ public class CheckOutATM extends ATM {
                 + ticket.getCheckInTime() + " - " + ticket.getCheckOutTime() + "\n\n$" + ticket.getFeeStrategy().getTicketFee(ticket.getCheckInTime(), ticket.getCheckOutTime()));
         }*/
     }
-
-    /**
-     * Method to set a ticket as lost and display the result to the customer.
-     * @param ticket Ticket object
-     */
-    /*public static void lostTicket(Ticket ticket) {
-        ticket.bill = 25;
-        System.out.println("Best Value Parking Garage\n\n=========================\n\n" +
-                "Receipt for a vehicle id " + ticket.ticketNumber +
-                "\n\nLost Ticket\n\n$" + ticket.bill);
-    }*/
 
     /**
      * Overridden method from ATM superclass to present menu and determine course of action.
@@ -115,6 +79,10 @@ public class CheckOutATM extends ATM {
                                 ticket.setCheckOutTime(Clock.getInstance().getOutTime());
                                 if (ticket.getFeeStrategy() == null) {
                                     ticket.setFeeStrategy(new NormalFeeStrategy());
+                                    ticket.setBill(ticket.getFeeStrategy().getTicketFee(ticket.getCheckInTime(), ticket.getCheckOutTime()));
+                                    printScreen(ticket);
+                                }
+                                if (ticket.getFeeStrategy().toString() == "Special Event") {
                                     ticket.setBill(ticket.getFeeStrategy().getTicketFee(ticket.getCheckInTime(), ticket.getCheckOutTime()));
                                     printScreen(ticket);
                                 }

@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Abstract class to serve as superclass of Check-In and Check-Out ATMs, with static tickets ArrayList and Scanner.
  * @author plee19
- * @version 1
+ * @version 1.0
  */
 public abstract class ATM {
     static ArrayList<Ticket> tickets = new ArrayList<>();
@@ -14,5 +14,8 @@ public abstract class ATM {
     static FileInput ticketFile = new FileInput("ticketFile.txt");
     static FileOutput ticketFileOut = new FileOutput("ticketFile.txt");
 
+    /**
+     * Abstract method for ATMs to implement for their displays.
+     */
     public abstract void displayStartScreen();
 }

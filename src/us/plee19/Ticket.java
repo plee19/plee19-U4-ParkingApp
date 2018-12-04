@@ -3,7 +3,7 @@ package us.plee19;
 /**
  * Ticket class with constructors for creation of Ticket objects to be used by ATMs.
  * @author plee19
- * @version 1
+ * @version 1.0
  */
 public class Ticket {
     private static int count = 100;
@@ -23,13 +23,6 @@ public class Ticket {
         this.setCheckInTime(inTime);
     }
 
-    public Ticket(Ticket ticket, FeeStrategy feeStrategy) {
-        this.ticketNumber = ticket.getTicketNumber();
-        this.checkInTime = ticket.getCheckInTime();
-        this.checkOutTime = ticket.getCheckOutTime();
-        this.feeStrategy = feeStrategy;
-    }
-
     /**
      * Constructor for building Ticket ArrayList from CSV file.
      * @param ticketNumber int ticket number
@@ -44,50 +37,98 @@ public class Ticket {
         this.setBill(bill);
     }
 
+    /**
+     * Getter method for ticketNumber, returning an int.
+     * @return int value of ticketNumber
+     */
     public int getTicketNumber() {
         return ticketNumber;
     }
 
+    /**
+     * Setter method for ticketNumber, taking in an int.
+     * @param ticketNumber int value of ticketNumber
+     */
     public void setTicketNumber(int ticketNumber) {
         this.ticketNumber = ticketNumber;
     }
 
+    /**
+     * Getter method for checkInTime, returning an int.
+     * @return int value of checkInTime
+     */
     public int getCheckInTime() {
         return checkInTime;
     }
 
+    /**
+     * Setter method for checkInTime, taking in an int.
+     * @param checkInTime int value of checkInTime
+     */
     public void setCheckInTime(int checkInTime) {
         this.checkInTime = checkInTime;
     }
 
+    /**
+     * Getter method for checkOutTime, returning an int.
+     * @return int value of checkOutTime
+     */
     public int getCheckOutTime() {
         return checkOutTime;
     }
 
+    /**
+     * Setter method for checkOutTime, taking in an int.
+     * @param checkOutTime int value of checkOutTime
+     */
     public void setCheckOutTime(int checkOutTime) {
         this.checkOutTime = checkOutTime;
     }
 
+    /**
+     * Getter method for bill, returning an int.
+     * @return int value of bill
+     */
     public int getBill() {
         return bill;
     }
 
+    /**
+     * Setter method for bill, taking in an int.
+     * @param bill int value of bill
+     */
     public void setBill(int bill) {
         this.bill = bill;
     }
 
+    /**
+     * Setter method for feeStrategy, taking in a FeeStrategy.
+     * @param feeStrategy FeeStrategy instance
+     */
     public void setFeeStrategy(FeeStrategy feeStrategy) {
         this.feeStrategy = feeStrategy;
     }
 
+    /**
+     * Getter method for feeStrategy, returning a FeeStrategy.
+     * @return feeStrategy FeeStrategy instance
+     */
     public FeeStrategy getFeeStrategy() {
         return feeStrategy;
     }
 
+    /**
+     * Getter method for count used for where to start ticket numbers, returning an int.
+     * @return count int value for ticket number start
+     */
     public int getCount() {
         return count;
     }
 
+    /**
+     * Setter method for count used for where to start ticket numbers, taking in an int.
+     * @param count int value for ticket number start
+     */
     public void setCount(int count) {
         this.count = count;
     }
